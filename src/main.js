@@ -3,16 +3,79 @@ import VueRouter from 'vue-router'
 import store from './store'
 import vuetify from './vuetify'
 
+/* eslint-disable no-unused-vars */
+
 Vue.config.productionTip = false;
 
 Vue.use(VueRouter)
 
 import axios from 'axios'
-
 import application from './application.vue'
+
+import index from './component/index'
+import notFound from './component/notFound'
+import navigation from './component/navigation'
+
+import administratorLogin from './component/administrator/login'
+import administratorNavigation from './component/administrator/navigation'
+import administratorDashboard from './component/administrator/dashboard'
+
+import tenantLogin from './component/tenant/login'
+import tenantNavigation from './component/tenant/navigation'
+import tenantDashboard from './component/tenant/dashboard'
+
+import userLogin from './component/user/login'
+import userNavigation from './component/user/navigation'
+import userDashboard from './component/user/dashboard'
 
 const router = new VueRouter({
 	routes: [
+		// common
+		{ path: '/', component: index, props: true },
+		{ path: '/404', component: notFound, props: true },
+		{ path: '*', redirect: '/404' },
+
+		// administrator portal
+		{ path: '', component: navigation, props: true, children: [{ path: '/administrator', component: administratorLogin, props: true }] },
+		{
+			path: '', component: administratorNavigation, props: true,
+			children: [
+				{
+					path: '/administrator/dashboard', component: administratorDashboard, props: true,
+					meta: {
+						role: "Administrator",
+					}
+				}
+			]
+		},
+
+		// tenant portal
+		{ path: '', component: navigation, props: true, children: [{ path: '/tenant', component: tenantLogin, props: true }] },
+		{
+			path: '', component: tenantNavigation, props: true,
+			children: [
+				{
+					path: '/tenant/dashboard', component: tenantDashboard, props: true,
+					meta: {
+						role: "Tenant",
+					}
+				}
+			]
+		},
+
+		// user portal
+		{ path: '', component: navigation, props: true, children: [{ path: '/user', component: userLogin, props: true }] },
+		{
+			path: '', component: userNavigation, props: true,
+			children: [
+				{
+					path: '/user/dashboard', component: userDashboard, props: true,
+					meta: {
+						role: "User",
+					}
+				}
+			]
+		}
 	]
 })
 
@@ -29,12 +92,12 @@ router.beforeEach((to, from, next) => {
 			return;
 		}
 		next('/tenant');
-	} else if (to.matched.some(record => record.meta.role)) {
-		if (store.state.principal.role) {
+	} else if (to.matched.some(record => record.meta.role === 'User')) {
+		if (store.state.principal.role === 'User') {
 			next();
 			return;
 		}
-		next('/');
+		next('/user');
 	} else {
 		next();
 	}
@@ -48,8 +111,6 @@ if (window.location.origin.includes("localhost")) {
 }
 
 Vue.prototype.$window = window;
-
-/* eslint-disable no-unused-vars */
 
 new Vue({
 	router,

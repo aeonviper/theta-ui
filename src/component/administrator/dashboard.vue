@@ -1,3 +1,3 @@
 <template>
-	<v-main>Dashboard</v-main>
+	<v-main></v-main>
 </template>
