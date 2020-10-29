@@ -22,7 +22,7 @@
 
 <script>
 export default {
-	data: () => {
+	data: function() {
 		return {
 			email: null,
 			password: null
