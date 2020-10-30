@@ -37,11 +37,3 @@ div.banner {
 	font-family: "Open Sans", sans-serif;
 }
 </style>
-
-<script>
-export default {
-	data: () => {
-		return {};
-	}
-};
-</script>

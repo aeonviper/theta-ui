@@ -10,6 +10,7 @@ Vue.config.productionTip = false;
 Vue.use(VueRouter)
 
 import axios from 'axios'
+
 import application from './application.vue'
 
 import index from './component/index'
@@ -117,12 +118,12 @@ new Vue({
 	store,
 	vuetify,
 	render: display => display(application),
-	data: () => {
+	data: function() {
 		return {
 			loader: { count: 0, stroke: 7, diameter: 50, value: false }
 		};
 	},
-	created: () => {
+	created: function() {
 		axios.interceptors.request.use(
 			request => {
 				this.load();
@@ -198,12 +199,6 @@ new Vue({
 			}
 			this.loader.value = this.loader.count > 0;
 		},
-		ellipsify(text, limit) {
-			if (text && text.length > limit) {
-				return text.substring(0, limit) + '...';
-			}
-			return text;
-		},
 		logSuccess: function (o) {
 			// console.log('>> Success: ' + JSON.stringify(o.data));
 		},
@@ -213,6 +208,12 @@ new Vue({
 		},
 		clone(object) {
 			return JSON.parse(JSON.stringify(object));
+		},
+		ellipsify(text, limit) {
+			if (text && text.length > limit) {
+				return text.substring(0, limit) + '...';
+			}
+			return text;
 		},
 		textify(text, before, after) {
 			if (text && text.trim().length > 0) {

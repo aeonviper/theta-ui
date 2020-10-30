@@ -4,7 +4,7 @@ import axios from 'axios'
 
 Vue.use(Vuex)
 
-/* eslint-disable no-debugger */
+/* eslint-disable */
 
 if (localStorage.getItem("principal") && JSON.parse(localStorage.getItem("principal")).token) {
 	axios.defaults.headers.common['Authorization'] = 'Bearer ' + JSON.parse(localStorage.getItem("principal")).token;
@@ -58,9 +58,7 @@ export default new Vuex.Store({
 					{
 						type: principal.type,
 						email: principal.email,
-						password: principal.password,
-						tenantSlug: principal.tenantSlug,
-						experienceSlug: principal.experienceSlug
+						password: principal.password
 					}
 				).then(response => {
 					let principal = response.data;
@@ -89,6 +87,6 @@ export default new Vuex.Store({
 		}
 	},
 	getters: {
-		authenticated: state => (state.principal && state.principal.token)
-	},
+		isAuthenticated: state => (state.principal && state.principal.token)
+	}
 })
