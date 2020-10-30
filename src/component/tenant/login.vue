@@ -4,7 +4,7 @@
 			<v-form>
 				<v-card width="360">
 					<v-card-title class="title d-flex justify-center align-center" style="background-color:#003366;color:white;">
-						<v-img max-width="150" src="../../asset/logo.png"></v-img>
+						<v-img max-width="150" src="logo.png"></v-img>
 					</v-card-title>
 					<v-card-text style="padding-top:20px;">
 						<v-text-field v-model="email" label="Email"></v-text-field>

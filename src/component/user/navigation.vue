@@ -3,7 +3,7 @@
 		<v-app-bar color="#003366" absolute clipped-left flat app>
 			<v-app-bar-nav-icon class="hidden-sm-and-up"></v-app-bar-nav-icon>
 
-			<img src="../../asset/logo.png" style="height:50px;" @click="$store.commit('debug')" />
+			<img src="logo.png" style="height:50px;" @click="$store.commit('debug')" />
 
 			<v-spacer></v-spacer>
 
@@ -77,7 +77,7 @@
 			</v-card>
 		</v-dialog>
 
-		<img v-show="$root.loader.value" src="../../asset/loader.gif" class="loader" />
+		<img v-show="$root.loader.value" src="loader.gif" class="loader" />
 	</v-app>
 </template>
 

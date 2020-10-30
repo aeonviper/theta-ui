@@ -24,7 +24,7 @@
 			</v-card>
 		</v-dialog>
 
-		<img v-show="$root.loader.value" src="../asset/loader.gif" class="loader" />
+		<img v-show="$root.loader.value" src="loader.gif" class="loader" />
 	</v-app>
 </template>
 

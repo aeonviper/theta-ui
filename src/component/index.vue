@@ -2,7 +2,7 @@
 	<v-app>
 		<v-main style="display:flex;align-items:center;">
 			<center>
-				<img src="../asset/logo.png" />
+				<img src="logo.png" />
 			</center>
 		</v-main>
 	</v-app>
