@@ -132,7 +132,7 @@ new Vue({
 			error => {
 				this.unload();
 
-				let notification = { title: 'Unknown error', content: "" };
+				let notification = { title: 'Unknown error', content: '' };
 				if (error.response) {
 					if (error.response.status == 400) {
 						notification.title = 'Bad request';
@@ -161,10 +161,9 @@ new Vue({
 				return response;
 			},
 			error => {
-
 				this.unload();
 
-				let notification = { title: 'Unknown error', content: "" };
+				let notification = { title: 'Unknown error', content: '' };
 				if (error.response) {
 					if (error.response.status == 400) {
 						notification.title = 'Bad request';
