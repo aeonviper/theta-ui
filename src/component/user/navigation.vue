@@ -38,7 +38,7 @@
 
 		<router-view></router-view>
 
-		<v-dialog v-model="showChangePassword">
+		<v-dialog v-model="showChangePassword" max-width="500">
 			<v-card>
 				<v-card-title>Change password</v-card-title>
 				<v-form class="px-5">
