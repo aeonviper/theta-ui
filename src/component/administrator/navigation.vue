@@ -38,7 +38,7 @@
 
 		<router-view></router-view>
 
-		<v-dialog v-model="showChangePassword" max-width="500">
+		<v-dialog v-model="showChangePassword">
 			<v-card>
 				<v-card-title>Change password</v-card-title>
 				<v-form class="px-5">
@@ -54,7 +54,7 @@
 			</v-card>
 		</v-dialog>
 
-		<v-dialog v-model="$store.state.notification.show" width="500">
+		<v-dialog v-model="$store.state.notification.show">
 			<v-card style="padding:20px;">
 				<div style="display:flex;justify-content:space-between;">
 					<h2 style="margin-bottom:10px;">{{$store.state.notification.title}}</h2>

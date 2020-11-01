@@ -2,7 +2,7 @@
 	<v-app>
 		<router-view></router-view>
 
-		<v-dialog v-model="$store.state.notification.show" width="500">
+		<v-dialog v-model="$store.state.notification.show">
 			<v-card style="padding:20px;">
 				<div style="display:flex;justify-content:space-between;">
 					<h2 style="margin-bottom:10px;">{{$store.state.notification.title}}</h2>
