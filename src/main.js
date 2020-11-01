@@ -32,7 +32,7 @@ import userDashboard from './component/user/dashboard'
 const router = new VueRouter({
 	routes: [
 		// common
-		{ path: '/', component: index, props: true },
+		{ path: '', component: navigation, props: true, children: [{ path: '/', component: index, props: true }] },
 		{ path: '/404', component: notFound, props: true },
 		{ path: '*', redirect: '/404' },
 
