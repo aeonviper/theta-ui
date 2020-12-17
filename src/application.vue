@@ -1,21 +1,15 @@
 <template>
 	<div>
-		<div
-			v-if="$window.location.origin.includes('test')"
-			class="banner"
-			style="background-color:#03B3B2;color:white;"
-		>TEST</div>
-		<div
-			v-if="$window.location.origin.includes('localhost')"
-			class="banner"
-			style="background-color:#82BA00;color:white;"
-		>DEVELOPMENT</div>
-
+		<div v-if="$window.location.origin.includes('test')" class="banner" style="background-color:#03B3B2;color:white;">TEST</div>
+		<div v-if="$window.location.origin.includes('localhost')" class="banner" style="background-color:#82BA00;color:white;">DEVELOPMENT</div>
 		<router-view></router-view>
 	</div>
 </template>
 
 <style>
+.pointer {
+	cursor: pointer;
+}
 .loader {
 	position: fixed;
 	z-index: 88;
@@ -35,5 +29,10 @@ div.banner {
 	padding: 5px 10px;
 	border-radius: 0 0 5px 5px;
 	font-family: "Open Sans", sans-serif;
+}
+.ellipsis {
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
 }
 </style>

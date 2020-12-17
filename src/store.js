@@ -9,7 +9,7 @@ Vue.use(Vuex)
 if (localStorage.getItem("principal") && JSON.parse(localStorage.getItem("principal")).token) {
 	axios.defaults.headers.common['Authorization'] = 'Bearer ' + JSON.parse(localStorage.getItem("principal")).token;
 }
-console.log('axios authorization: ' + axios.defaults.headers.common['Authorization']);
+// console.log('axios authorization: ' + axios.defaults.headers.common['Authorization']);
 
 export default new Vuex.Store({
 	state: {
@@ -22,18 +22,18 @@ export default new Vuex.Store({
 	},
 	mutations: {
 		login(state, principal) {
-			console.log('mutation: login before state: ' + JSON.stringify(state) + " principal: " + JSON.stringify(principal));
+			// console.log('mutation: login before state: ' + JSON.stringify(state) + " principal: " + JSON.stringify(principal));
 			state.principal = principal;
 			axios.defaults.headers.common['Authorization'] = 'Bearer ' + principal.token;
 			localStorage.setItem("principal", JSON.stringify(principal));
-			console.log('mutation: login after state: ' + JSON.stringify(state, null, 4));
+			// console.log('mutation: login after state: ' + JSON.stringify(state, null, 4));
 		},
 		logout(state) {
-			console.log('mutation: logout before state: ' + JSON.stringify(state));
+			// console.log('mutation: logout before state: ' + JSON.stringify(state));
 			state.principal = {};
 			delete axios.defaults.headers.common['Authorization'];
 			localStorage.removeItem("principal");
-			console.log('mutation: logout after state: ' + JSON.stringify(state));
+			// console.log('mutation: logout after state: ' + JSON.stringify(state));
 		},
 		showNotification(state, { title, content }) {
 			state.notification.title = title;
@@ -51,7 +51,7 @@ export default new Vuex.Store({
 	},
 	actions: {
 		login({ commit }, principal) {
-			console.log('action: login');
+			// console.log('action: login');
 			return new Promise((resolve, reject) => {
 				axios.post(
 					"/system/authentication/login",
@@ -70,7 +70,7 @@ export default new Vuex.Store({
 			});
 		},
 		logout({ commit }) {
-			console.log('action: logout');
+			// console.log('action: logout');
 			return new Promise((resolve, reject) => {
 				axios.post(
 					"/system/authentication/logout",
@@ -82,7 +82,7 @@ export default new Vuex.Store({
 			});
 		},
 		debug({ commit }) {
-			console.log('action: debug');
+			// console.log('action: debug');
 			commit('debug');
 		}
 	},

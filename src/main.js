@@ -107,7 +107,21 @@ new Vue({
 	render: display => display(application),
 	data: function() {
 		return {
-			loader: { count: 0, stroke: 7, diameter: 50, value: false }
+			loader: { count: 0, stroke: 7, diameter: 50, value: false },
+			monthList: [
+				"January",
+				"February",
+				"March",
+				"April",
+				"May",
+				"June",
+				"July",
+				"August",
+				"September",
+				"October",
+				"November",
+				"December"
+			]
 		};
 	},
 	created: function() {
@@ -230,6 +244,25 @@ new Vue({
 				}
 			}
 			return null;
+		},
+		formatDateTime(instant) {
+			if (instant != null) {
+				return (
+					instant.getDate() +
+					" " +
+					this.monthList[instant.getMonth() - 1] +
+					" " +
+					instant.getFullYear() +
+					" " +
+					(instant.getHours() < 10 ? "0" : "") +
+					instant.getHours() +
+					":" +
+					(instant.getMinutes() < 10 ? "0" : "") +
+					instant.getMinutes()
+				);
+			} else {
+				return "";
+			}
 		}
 	}
 }).$mount('#application')
