@@ -15,6 +15,7 @@ import application from './application.vue'
 
 import index from './component/index'
 import notFound from './component/notFound'
+import unauthorized from './component/unauthorized'
 import navigation from './component/navigation'
 
 import administratorLogin from './component/administrator/login'
@@ -33,20 +34,16 @@ const router = new VueRouter({
 	routes: [
 		// common
 		{ path: '', component: navigation, props: true, children: [{ path: '/', component: index, props: true }] },
-		{ path: '/404', component: notFound, props: true },
-		{ path: '*', redirect: '/404' },
+		{ path: '/unauthorized', component: unauthorized, props: true },
+		{ path: '/notfound', component: notFound, props: true },
+		{ path: '*', redirect: '/notfound' },
 
 		// administrator portal
 		{ path: '', component: navigation, props: true, children: [{ path: '/administrator', component: administratorLogin, props: true }] },
 		{
 			path: '', component: administratorNavigation, props: true,
 			children: [
-				{
-					path: '/administrator/dashboard', component: administratorDashboard, props: true,
-					meta: {
-						role: "Administrator",
-					}
-				}
+				{ path: '/administrator/dashboard', component: administratorDashboard, props: true, meta: { role: "Administrator" } }
 			]
 		},
 
@@ -55,12 +52,7 @@ const router = new VueRouter({
 		{
 			path: '', component: tenantNavigation, props: true,
 			children: [
-				{
-					path: '/tenant/dashboard', component: tenantDashboard, props: true,
-					meta: {
-						role: "Tenant",
-					}
-				}
+				{ path: '/tenant/dashboard', component: tenantDashboard, props: true, meta: { role: "Tenant" } }
 			]
 		},
 
@@ -69,12 +61,7 @@ const router = new VueRouter({
 		{
 			path: '', component: userNavigation, props: true,
 			children: [
-				{
-					path: '/user/dashboard', component: userDashboard, props: true,
-					meta: {
-						role: "User",
-					}
-				}
+				{ path: '/user/dashboard', component: userDashboard, props: true, meta: { role: "User" } }
 			]
 		}
 	]
