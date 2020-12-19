@@ -1,6 +1,6 @@
 <template>
 	<v-app>
-		<v-app-bar color="#003366" absolute clipped-left flat app>
+		<v-app-bar color="#f8f8f8" absolute clipped-left flat app>
 			<v-app-bar-nav-icon class="hidden-sm-and-up"></v-app-bar-nav-icon>
 
 			<img src="logo.png" style="height:50px;" @click="$store.commit('debug')" />
@@ -10,8 +10,8 @@
 			<v-menu left bottom offset-y rounded="b-xl">
 				<template v-slot:activator="{ on, attrs }">
 					<v-btn text v-bind="attrs" v-on="on">
-						<v-icon color="rgba(255, 255, 255)">mdi-account-circle</v-icon>
-						<span class="mx-1" style="color:#fff;text-transform:none;">{{$store.state.principal.email}}</span>
+						<v-icon>mdi-account-circle</v-icon>
+						<span class="mx-1" style="text-transform:none;">{{$store.state.principal.email}}</span>
 					</v-btn>
 				</template>
 
@@ -54,11 +54,11 @@
 			</v-card>
 		</v-dialog>
 
-		<v-dialog v-model="$store.state.notification.show">
+		<v-dialog v-model="$store.state.notification.show" max-width="500">
 			<v-card style="padding:20px;">
 				<div style="display:flex;justify-content:space-between;">
 					<h2 style="margin-bottom:10px;">{{$store.state.notification.title}}</h2>
-					<v-btn icon color="secondary" @click="closeNotification()">
+					<v-btn icon color="secondary" @click="closeNotification">
 						<v-icon>mdi-close</v-icon>
 					</v-btn>
 				</div>
@@ -72,7 +72,7 @@
 					<div style="color:#E26026;font-size:14px;">{{$store.state.notification.content}}</div>
 				</template>
 				<div style="text-align:center;margin-top:20px;">
-					<v-btn color="#009ec1" @click="closeNotification()">Close</v-btn>
+					<v-btn color="primary" @click="closeNotification">Close</v-btn>
 				</div>
 			</v-card>
 		</v-dialog>

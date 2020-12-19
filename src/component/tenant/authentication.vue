@@ -1,9 +1,9 @@
 <template>
 	<v-main>
-		<div class="d-flex justify-center align-center" style="background-color:#d2d6de;background-size:cover;min-height:100vh;">
+		<div class="d-flex justify-center align-center" style="background-color:#f8f8f8;background-size:cover;height:100vh;">
 			<v-form>
 				<v-card width="360">
-					<v-card-title class="title d-flex justify-center align-center" style="background-color:#003366;color:white;">
+					<v-card-title class="title d-flex justify-center align-center" style="background-color:#fff;">
 						<v-img max-width="150" src="logo.png"></v-img>
 					</v-card-title>
 					<v-card-text style="padding-top:20px;">
@@ -12,7 +12,7 @@
 					</v-card-text>
 					<v-card-actions>
 						<v-spacer></v-spacer>
-						<v-btn @click="login()" color="primary">Login</v-btn>
+						<v-btn @click="login" color="primary">Login</v-btn>
 					</v-card-actions>
 				</v-card>
 			</v-form>
@@ -32,11 +32,11 @@ export default {
 		login() {
 			this.$store
 				.dispatch("login", {
-					type: "User",
+					type: "Tenant",
 					email: this.email,
 					password: this.password
 				})
-				.then(() => this.$router.push("/user/dashboard"))
+				.then(() => this.$router.push("/tenant/dashboard"))
 				.catch(() => {});
 		}
 	}

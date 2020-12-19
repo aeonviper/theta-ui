@@ -17,29 +17,38 @@ import index from './component/index'
 import notFound from './component/notFound'
 import unauthorized from './component/unauthorized'
 import navigation from './component/navigation'
+import registration from './component/registration'
 
-import administratorLogin from './component/administrator/login'
+import administratorAuthentication from './component/administrator/authentication'
 import administratorNavigation from './component/administrator/navigation'
 import administratorDashboard from './component/administrator/dashboard'
 
-import tenantLogin from './component/tenant/login'
+import tenantAuthentication from './component/tenant/authentication'
 import tenantNavigation from './component/tenant/navigation'
 import tenantDashboard from './component/tenant/dashboard'
+import tenantPersonAdd from './component/tenant/personAdd'
+import tenantPersonEdit from './component/tenant/personEdit'
 
-import userLogin from './component/user/login'
+import userAuthentication from './component/user/authentication'
 import userNavigation from './component/user/navigation'
 import userDashboard from './component/user/dashboard'
 
 const router = new VueRouter({
 	routes: [
 		// common
-		{ path: '', component: navigation, props: true, children: [{ path: '/', component: index, props: true }] },
+		{ path: '', component: navigation, props: true,
+			children: [
+				{ path: '/', component: index, props: true },
+				{ path: '/register', component: registration, props: true }
+			] 
+		},
 		{ path: '/unauthorized', component: unauthorized, props: true },
 		{ path: '/notfound', component: notFound, props: true },
+		
 		{ path: '*', redirect: '/notfound' },
 
 		// administrator portal
-		{ path: '', component: navigation, props: true, children: [{ path: '/administrator', component: administratorLogin, props: true }] },
+		{ path: '', component: navigation, props: true, children: [{ path: '/administrator', component: administratorAuthentication, props: true }] },
 		{
 			path: '', component: administratorNavigation, props: true,
 			children: [
@@ -48,16 +57,18 @@ const router = new VueRouter({
 		},
 
 		// tenant portal
-		{ path: '', component: navigation, props: true, children: [{ path: '/tenant', component: tenantLogin, props: true }] },
+		{ path: '', component: navigation, props: true, children: [{ path: '/tenant', component: tenantAuthentication, props: true }] },
 		{
 			path: '', component: tenantNavigation, props: true,
 			children: [
-				{ path: '/tenant/dashboard', component: tenantDashboard, props: true, meta: { role: "Tenant" } }
+				{ path: '/tenant/dashboard', component: tenantDashboard, props: true, meta: { role: "Tenant" } },
+				{ path: '/tenant/person/add', component: tenantPersonAdd, props: true, meta: { role: "Tenant" } },
+				{ path: '/tenant/person/edit/:entityId', component: tenantPersonEdit, props: true, meta: { role: "Tenant" } }
 			]
 		},
 
 		// user portal
-		{ path: '', component: navigation, props: true, children: [{ path: '/user', component: userLogin, props: true }] },
+		{ path: '', component: navigation, props: true, children: [{ path: '/user', component: userAuthentication, props: true }] },
 		{
 			path: '', component: userNavigation, props: true,
 			children: [
@@ -221,6 +232,15 @@ new Vue({
 			}
 			return text;
 		},
+		enum(text) {
+			if (text) {
+				return text.replace(/_/g, ' ');
+			}
+			return text;
+		},
+		downloadAsset(name) {
+			location.href = axios.defaults.baseURL + "/asset/file/" + name + "?download&time=" + (new Date());
+		},
 		isImage(text) {
 			if (text) {
 				let q = text.toLowerCase();
@@ -235,12 +255,12 @@ new Vue({
 			}
 			return false;
 		},
-		asset(text) {
+		asset(text, resolution) {
 			if (text) {
 				if (text.toLowerCase().startsWith('http')) {
 					return text; 
 				} else {
-					return axios.defaults.baseURL + '/asset/file/' + text;
+					return axios.defaults.baseURL + '/asset/' + resolution + '/' + text;
 				}
 			}
 			return null;
