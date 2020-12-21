@@ -106,7 +106,7 @@ axios.defaults.baseURL = '';
 
 if (window.location.origin.includes("localhost")) {
 	axios.defaults.withCredentials = true;
-	axios.defaults.baseURL = 'http://localhost:8900/epsilon';
+	axios.defaults.baseURL = 'http://localhost:8900/theta';
 }
 
 Vue.prototype.$window = window;

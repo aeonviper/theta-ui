@@ -1,4 +1,4 @@
-# epsilon-ui
+# theta-ui
 
 ```
 npm install
