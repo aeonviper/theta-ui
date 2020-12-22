@@ -44,7 +44,6 @@ const router = new VueRouter({
 		},
 		{ path: '/unauthorized', component: unauthorized, props: true },
 		{ path: '/notfound', component: notFound, props: true },
-		
 		{ path: '*', redirect: '/notfound' },
 
 		// administrator portal
