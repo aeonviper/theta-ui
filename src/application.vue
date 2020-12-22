@@ -12,7 +12,7 @@
 }
 .loader {
 	position: fixed;
-	z-index: 88;
+	z-index: 888;
 	top: 30%;
 	left: 50%;
 	transform: translateX(-50%);
