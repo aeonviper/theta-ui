@@ -65,6 +65,16 @@
 					</v-list-item-content>
 				</v-list-item>
 			</v-list>
+			<v-list nav v-if="['Administrator'].includes($store.state.principal.role)">
+				<v-list-item link to="/administrator/staff">
+					<v-list-item-icon>
+						<v-icon color="secondary">mdi-account-multiple-outline</v-icon>
+					</v-list-item-icon>
+					<v-list-item-content>
+						<v-list-item-title>Staff</v-list-item-title>
+					</v-list-item-content>
+				</v-list-item>
+			</v-list>
 		</v-navigation-drawer>
 
 		<router-view></router-view>

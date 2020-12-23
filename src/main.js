@@ -23,6 +23,7 @@ import administratorAuthentication from './component/administrator/authenticatio
 import administratorNavigation from './component/administrator/navigation'
 import administratorDashboard from './component/administrator/dashboard'
 import administratorPerson from './component/administrator/person'
+import administratorStaff from './component/administrator/staff'
 
 import tenantAuthentication from './component/tenant/authentication'
 import tenantNavigation from './component/tenant/navigation'
@@ -54,6 +55,7 @@ const router = new VueRouter({
 			path: '', component: administratorNavigation, props: true,
 			children: [
 				{ path: '/administrator/person', component: administratorPerson, props: true, meta: { role: "Administrator" } },
+				{ path: '/administrator/staff', component: administratorStaff, props: true, meta: { role: "Administrator" } },
 				{ path: '/administrator/dashboard', component: administratorDashboard, props: true, meta: { role: "Administrator" } }
 			]
 		},
