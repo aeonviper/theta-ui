@@ -8,7 +8,7 @@
 					</v-card-title>
 					<v-card-text style="padding-top:20px;">
 						<v-text-field v-model="email" label="Email"></v-text-field>
-						<v-text-field v-model="password" label="Password" type="password"></v-text-field>
+						<v-text-field v-model="password" label="Password" type="password" @keyup.enter="login"></v-text-field>
 					</v-card-text>
 					<v-card-actions>
 						<v-spacer></v-spacer>

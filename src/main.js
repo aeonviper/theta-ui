@@ -22,10 +22,12 @@ import registration from './component/registration'
 import administratorAuthentication from './component/administrator/authentication'
 import administratorNavigation from './component/administrator/navigation'
 import administratorDashboard from './component/administrator/dashboard'
+import administratorPerson from './component/administrator/person'
 
 import tenantAuthentication from './component/tenant/authentication'
 import tenantNavigation from './component/tenant/navigation'
 import tenantDashboard from './component/tenant/dashboard'
+import tenantPerson from './component/tenant/person'
 import tenantPersonAdd from './component/tenant/personAdd'
 import tenantPersonEdit from './component/tenant/personEdit'
 
@@ -51,6 +53,7 @@ const router = new VueRouter({
 		{
 			path: '', component: administratorNavigation, props: true,
 			children: [
+				{ path: '/administrator/person', component: administratorPerson, props: true, meta: { role: "Administrator" } },
 				{ path: '/administrator/dashboard', component: administratorDashboard, props: true, meta: { role: "Administrator" } }
 			]
 		},
@@ -61,6 +64,7 @@ const router = new VueRouter({
 			path: '', component: tenantNavigation, props: true,
 			children: [
 				{ path: '/tenant/dashboard', component: tenantDashboard, props: true, meta: { role: "Tenant" } },
+				{ path: '/tenant/person', component: tenantPerson, props: true, meta: { role: "Tenant" } },
 				{ path: '/tenant/person/add', component: tenantPersonAdd, props: true, meta: { role: "Tenant" } },
 				{ path: '/tenant/person/edit/:entityId', component: tenantPersonEdit, props: true, meta: { role: "Tenant" } }
 			]

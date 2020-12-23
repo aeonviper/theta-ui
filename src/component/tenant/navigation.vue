@@ -55,6 +55,16 @@
 					</v-list-item-content>
 				</v-list-item>
 			</v-list>
+			<v-list nav v-if="['Tenant'].includes($store.state.principal.role)">
+				<v-list-item link to="/tenant/person">
+					<v-list-item-icon>
+						<v-icon color="secondary">mdi-account-multiple</v-icon>
+					</v-list-item-icon>
+					<v-list-item-content>
+						<v-list-item-title>Person</v-list-item-title>
+					</v-list-item-content>
+				</v-list-item>
+			</v-list>
 		</v-navigation-drawer>
 
 		<router-view></router-view>

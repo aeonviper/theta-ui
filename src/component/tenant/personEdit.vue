@@ -14,7 +14,7 @@
 			</v-card-text>
 			<v-card-actions>
 				<v-spacer></v-spacer>
-				<v-btn @click="$router.push('/tenant/dashboard')">Cancel</v-btn>
+				<v-btn @click="$router.push('/tenant/person')">Cancel</v-btn>
 				<v-btn @click="editPerson" color="primary">Edit</v-btn>
 			</v-card-actions>
 		</v-card>
