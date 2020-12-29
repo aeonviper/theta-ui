@@ -235,7 +235,7 @@ new Vue({
 			if (text && text.trim().length > 0) {
 				return (before ? before : '') + text + (after ? after : '');
 			}
-			return text;
+			return '';
 		},
 		enum(text) {
 			if (text) {
