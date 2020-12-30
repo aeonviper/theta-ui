@@ -146,10 +146,15 @@ export default {
 				.catch(() => {});
 		},
 		listPerson() {
-			const { sortBy, sortDesc, page, itemsPerPage } = this.personListOption;
-			console.log(">>> " + JSON.stringify(this.personListOption));
+			const { sortBy, sortDesc, page, itemsPerPage, multiSort } = this.personListOption;
+			let sortField = 'id';
+			let sortDirection = "desc";
+			if (!multiSort && sortBy && sortBy.length == 1 && sortDesc && sortDesc.length == 1) {
+				sortField = sortBy[0];
+				sortDirection = sortDesc[0] ? "asc" : "desc";
+			}
 			axios
-				.get("/system/person/list/pagination?page=" + page + "&pageSize=" + itemsPerPage)
+				.get("/system/person/list/pagination?page=" + page + "&pageSize=" + itemsPerPage + "&sortField=" + sortField + "&sortDirection=" + sortDirection)
 				.then(response => {
 					this.personList = response.data.list;
 					this.personListTotal = response.data.total;
