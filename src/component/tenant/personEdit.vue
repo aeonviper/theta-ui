@@ -66,7 +66,7 @@ export default {
 	components: {
 		media
 	},
-	props: ["entityId"],
+	props: ["id"],
 	data: function() {
 		return {
 			person: {},
@@ -94,7 +94,7 @@ export default {
 		},
 		findPerson() {
 			axios
-				.get("/system/person?id=" + this.entityId)
+				.get("/system/person?id=" + this.id)
 				.then(response => {
 					this.person = response.data;
 				})

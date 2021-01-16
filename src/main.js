@@ -68,7 +68,7 @@ const router = new VueRouter({
 				{ path: '/tenant/dashboard', component: tenantDashboard, props: true, meta: { role: "Tenant" } },
 				{ path: '/tenant/person', component: tenantPerson, props: true, meta: { role: "Tenant" } },
 				{ path: '/tenant/person/add', component: tenantPersonAdd, props: true, meta: { role: "Tenant" } },
-				{ path: '/tenant/person/edit/:entityId', component: tenantPersonEdit, props: true, meta: { role: "Tenant" } }
+				{ path: '/tenant/person/edit/:id', component: tenantPersonEdit, props: true, meta: { role: "Tenant" } }
 			]
 		},
 
@@ -115,6 +115,35 @@ if (window.location.origin.includes("localhost")) {
 }
 
 Vue.prototype.$window = window;
+
+var monthList = [
+	"January",
+	"February",
+	"March",
+	"April",
+	"May",
+	"June",
+	"July",
+	"August",
+	"September",
+	"October",
+	"November",
+	"December"
+];
+
+Vue.filter('formatDate', function (value) {
+	if (value != null) {
+		return (
+			value.date.day +
+			" " +
+			monthList[value.date.month - 1] +
+			" " +
+			value.date.year
+		);
+	} else {
+		return "";
+	}
+});
 
 new Vue({
 	router,
@@ -275,7 +304,7 @@ new Vue({
 				return (
 					instant.getDate() +
 					" " +
-					this.monthList[instant.getMonth() - 1] +
+					this.monthList[instant.getMonth()] +
 					" " +
 					instant.getFullYear() +
 					" " +
