@@ -244,13 +244,6 @@ new Vue({
 			}
 			this.loader.value = this.loader.count > 0;
 		},
-		logSuccess: function (o) {
-			// console.log('>> Success: ' + JSON.stringify(o.data));
-		},
-		logError: function (o) {
-			// console.log('>> Error: ' + JSON.stringify(o.response.data));
-			// Sentry.captureMessage(JSON.stringify(o.response.data));
-		},
 		clone(object) {
 			return JSON.parse(JSON.stringify(object));
 		},
@@ -273,7 +266,7 @@ new Vue({
 			return text;
 		},
 		downloadAsset(name) {
-			location.href = axios.defaults.baseURL + "/asset/file/" + name + "?download&time=" + (new Date());
+			location.href = axios.defaults.baseURL + "/asset/file/" + name + "?download&random=" + (new Date().getTime());
 		},
 		isImage(text) {
 			if (text) {
@@ -298,6 +291,15 @@ new Vue({
 				}
 			}
 			return null;
+		},
+		projection(list, array) {
+			for (let item of list) {
+				for (let property in item) {
+					if (!array.includes(property)) {
+						delete item[property];
+					}
+				}
+			}
 		},
 		formatDateTime(instant) {
 			if (instant != null) {
