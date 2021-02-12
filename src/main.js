@@ -204,6 +204,11 @@ new Vue({
 		axios.interceptors.response.use(
 			response => {
 				this.unload();
+
+				if (response.data && response.data.type == 'NOTIFICATION') {
+					store.commit("showNotification", { title: 'Notification', content: response.data });
+				}
+
 				return response;
 			},
 			error => {
