@@ -99,7 +99,7 @@
 			<v-card style="padding:20px;">
 				<div style="display:flex;justify-content:space-between;">
 					<h2 style="margin-bottom:10px;">{{$store.state.notification.title}}</h2>
-					<v-btn icon color="secondary" @click="closeNotification">
+					<v-btn icon color="secondary" @click="hideNotification">
 						<v-icon>mdi-close</v-icon>
 					</v-btn>
 				</div>
@@ -113,7 +113,7 @@
 					<div style="color:#E26026;font-size:14px;">{{$store.state.notification.content}}</div>
 				</template>
 				<div style="text-align:center;margin-top:20px;">
-					<v-btn color="primary" @click="closeNotification">Close</v-btn>
+					<v-btn color="primary" @click="hideNotification">Close</v-btn>
 				</div>
 			</v-card>
 		</v-dialog>
@@ -157,7 +157,7 @@ export default {
 				})
 				.catch(() => {});
 		},
-		closeNotification() {
+		hideNotification() {
 			if (this.$store.state.notification.title === "Unauthorized") {
 				this.$store.commit("hideNotification");
 				this.$router.push("/administrator");
