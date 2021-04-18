@@ -6,7 +6,7 @@
 				<v-row no-gutters style="padding:5px 0 0 0;">
 					<v-col cols="12" sm="6">
 						<div class="d-flex px-2">
-							<h2>Person list</h2>
+							<h2>{{ $root.capitalizeFirst(title) }} list</h2>
 						</div>
 					</v-col>
 					<v-col></v-col>
@@ -35,7 +35,7 @@
 		<v-dialog v-model="dialogAdd" max-width="600px">
 			<v-card>
 				<v-card-title>
-					<span class="headline">Add</span>
+					<span class="headline">Add {{ title }}</span>
 				</v-card-title>
 				<v-card-text>
 					<v-text-field v-model="person.name" label="Name"></v-text-field>
@@ -55,7 +55,7 @@
 		<v-dialog v-model="dialogEdit" max-width="600px">
 			<v-card>
 				<v-card-title>
-					<span class="headline">Edit</span>
+					<span class="headline">Edit {{ title }}</span>
 				</v-card-title>
 				<v-card-text>
 					<v-text-field v-model="person.name" label="Name"></v-text-field>
@@ -75,9 +75,9 @@
 		<v-dialog v-model="dialogDelete" max-width="600px">
 			<v-card>
 				<v-card-title>
-					<span class="headline">Delete</span>
+					<span class="headline">Delete {{ title }}</span>
 				</v-card-title>
-				<v-card-text>Are you sure you want to delete this?</v-card-text>
+				<v-card-text>Are you sure you want to delete '{{ person.name }}' ({{ person.id }})?</v-card-text>
 				<v-card-actions>
 					<v-spacer></v-spacer>
 					<v-btn @click="dialogDelete = false">Cancel</v-btn>
@@ -95,6 +95,7 @@ import axios from "axios";
 export default {
 	data: function() {
 		return {
+			title: 'person',
 			fieldList: [
 				{
 					text: "Id",
@@ -150,7 +151,7 @@ export default {
 				.catch(() => {});
 		},
 		showEditPerson(item) {
-			this.person = Object.assign({}, item);
+			this.person = this.$root.clone(item);
 			this.dialogEdit = true;
 		},
 		editPerson() {
@@ -163,7 +164,7 @@ export default {
 				.catch(() => {});
 		},
 		showDeletePerson(item) {
-			this.person = Object.assign({}, item);
+			this.person = this.$root.clone(item);
 			this.dialogDelete = true;
 		},
 		deletePerson() {

@@ -37,7 +37,7 @@
 				<v-card-title>
 					<span class="headline">Delete</span>
 				</v-card-title>
-				<v-card-text>Are you sure you want to delete this?</v-card-text>
+				<v-card-text>Are you sure you want to delete '{{ person.name }}' ({{ person.id }})?</v-card-text>
 				<v-card-actions>
 					<v-spacer></v-spacer>
 					<v-btn @click="dialogDelete = false">Cancel</v-btn>
@@ -85,7 +85,7 @@ export default {
 				.catch(() => {});
 		},
 		showDeletePerson(item) {
-			this.person = Object.assign({}, item);
+			this.person = this.$root.clone(item);
 			this.dialogDelete = true;
 		},
 		deletePerson() {

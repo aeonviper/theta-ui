@@ -324,6 +324,9 @@ new Vue({
 			} else {
 				return "";
 			}
+		},
+		capitalizeFirst(text) {
+			return text && text[0].toUpperCase() + text.slice(1);
 		}
 	}
 }).$mount('#application')
