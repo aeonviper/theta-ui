@@ -1,14 +1,7 @@
 <template>
 	<v-main style="margin:0 10px;">
 		<div style="height:10px;"></div>
-		<v-data-table
-			:headers="fieldList"
-			:items="personList"
-			:footer-props="{ itemsPerPageOptions: [1,50,100,500,-1] }"
-			:options.sync="personListOption"
-			:server-items-length="personListTotal"
-			:loading="loading"
-		>
+		<v-data-table :headers="fieldList" :items="personList" sort-by="id" :search="keyword" :footer-props="{ itemsPerPageOptions: [50,100,500,-1] }">
 			<template v-slot:top>
 				<v-row no-gutters style="padding:5px 0 0 0;">
 					<v-col cols="12" sm="6">
@@ -19,7 +12,7 @@
 					<v-col></v-col>
 					<v-col cols="12" sm="6">
 						<div class="d-flex px-2">
-							<v-spacer></v-spacer>
+							<v-text-field v-model="keyword" append-icon="mdi-magnify" label="Search" hide-details style="margin-right:10px;"></v-text-field>
 							<v-btn small fab dark color="secondary" title="Add" @click="showAddPerson">
 								<v-icon>mdi-plus</v-icon>
 							</v-btn>
@@ -39,7 +32,7 @@
 			<template v-slot:no-data>Empty list</template>
 		</v-data-table>
 
-		<v-dialog v-model="dialogAdd" fullscreen>
+		<v-dialog v-model="dialogAdd" max-width="600px">
 			<v-card>
 				<v-card-title>
 					<span class="headline">Add {{ title }}</span>
@@ -59,7 +52,7 @@
 			</v-card>
 		</v-dialog>
 
-		<v-dialog v-model="dialogEdit" fullscreen>
+		<v-dialog v-model="dialogEdit" max-width="600px">
 			<v-card>
 				<v-card-title>
 					<span class="headline">Edit {{ title }}</span>
@@ -102,7 +95,7 @@ import axios from "axios";
 export default {
 	data: function() {
 		return {
-			title: 'staff',
+			title: 'person',
 			fieldList: [
 				{
 					text: "Id",
@@ -114,28 +107,18 @@ export default {
 				{ text: "Role", value: "role" },
 				{ text: "", value: "action", sortable: false }
 			],
+			keyword: "",
 			personList: [],
 			person: {},
 			dialogAdd: false,
 			dialogEdit: false,
 			dialogDelete: false,
-			roleList: [],
-			personListOption: {},
-			personListTotal: 0,
-			loading: true
+			roleList: []
 		};
 	},
 	mounted: function() {
 		this.listPerson();
 		this.listRole();
-	},
-	watch: {
-		personListOption: {
-			handler() {
-				this.listPerson();
-			},
-			deep: true
-		}
 	},
 	methods: {
 		listRole() {
@@ -147,19 +130,10 @@ export default {
 				.catch(() => {});
 		},
 		listPerson() {
-			const { sortBy, sortDesc, page, itemsPerPage, multiSort } = this.personListOption;
-			let sortField = 'id';
-			let sortDirection = "desc";
-			if (!multiSort && sortBy && sortBy.length == 1 && sortDesc && sortDesc.length == 1) {
-				sortField = sortBy[0];
-				sortDirection = sortDesc[0] ? "asc" : "desc";
-			}
 			axios
-				.get("/system/person/list/pagination?page=" + page + "&pageSize=" + itemsPerPage + "&sortField=" + sortField + "&sortDirection=" + sortDirection)
+				.get("/system/person/list")
 				.then(response => {
-					this.personList = response.data.list;
-					this.personListTotal = response.data.total;
-					this.loading = false;
+					this.personList = response.data;
 				})
 				.catch(() => {});
 		},

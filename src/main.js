@@ -23,7 +23,6 @@ import administratorAuthentication from './component/administrator/authenticatio
 import administratorNavigation from './component/administrator/navigation'
 import administratorDashboard from './component/administrator/dashboard'
 import administratorPerson from './component/administrator/person'
-import administratorStaff from './component/administrator/staff'
 
 import tenantAuthentication from './component/tenant/authentication'
 import tenantNavigation from './component/tenant/navigation'
@@ -35,6 +34,10 @@ import tenantPersonEdit from './component/tenant/personEdit'
 import userAuthentication from './component/user/authentication'
 import userNavigation from './component/user/navigation'
 import userDashboard from './component/user/dashboard'
+
+import menu from "./component/menu";
+import dashboard from "./component/dashboard";
+import person from "./component/person";
 
 const router = new VueRouter({
 	routes: [
@@ -55,7 +58,6 @@ const router = new VueRouter({
 			path: '', component: administratorNavigation, props: true,
 			children: [
 				{ path: '/administrator/person', component: administratorPerson, props: true, meta: { role: "Administrator" } },
-				{ path: '/administrator/staff', component: administratorStaff, props: true, meta: { role: "Administrator" } },
 				{ path: '/administrator/dashboard', component: administratorDashboard, props: true, meta: { role: "Administrator" } }
 			]
 		},
@@ -79,12 +81,27 @@ const router = new VueRouter({
 			children: [
 				{ path: '/user/dashboard', component: userDashboard, props: true, meta: { role: "User" } }
 			]
+		},
+
+		// portal
+		{
+			path: "", component: menu, props: true,
+			children: [
+				{ path: "/person", component: person, props: true, meta: { restricted: true } },
+				{ path: "/dashboard", component: dashboard, props: true, meta: { restricted: true } }
+			]
 		}
 	]
 })
 
 router.beforeEach((to, from, next) => {
-	if (to.matched.some(record => record.meta.role === 'Administrator')) {
+	if (to.matched.some(record => record.meta.restricted === true)) {
+		if (store.state.principal.role) {
+			next();
+			return;
+		}
+		next("/unauthorized");
+	} else if (to.matched.some(record => record.meta.role === 'Administrator')) {
 		if (store.state.principal.role === 'Administrator') {
 			next();
 			return;
@@ -116,20 +133,7 @@ if (window.location.origin.includes("localhost")) {
 
 Vue.prototype.$window = window;
 
-var monthList = [
-	"January",
-	"February",
-	"March",
-	"April",
-	"May",
-	"June",
-	"July",
-	"August",
-	"September",
-	"October",
-	"November",
-	"December"
-];
+var monthList = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
 Vue.filter('formatDate', function (value) {
 	if (value != null) {
