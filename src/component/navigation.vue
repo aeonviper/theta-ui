@@ -1,6 +1,6 @@
 <template>
 	<v-app>
-		<router-view></router-view>
+		<router-view :key="$route.fullPath"></router-view>
 
 		<v-dialog v-model="$store.state.notification.show" max-width="500">
 			<v-card style="padding:20px;">

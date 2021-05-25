@@ -1,15 +1,7 @@
 <template>
 	<v-main style="margin:0 10px;">
 		<div style="height:10px;"></div>
-		<v-data-table
-			:headers="fieldList"
-			:items="personList"
-			:footer-props="{ itemsPerPageOptions: [1,50,100,500,-1] }"
-			:options.sync="personListOption"
-			:server-items-length="personListTotal"
-			:loading="loading"
-			sort-by="id"
-		>
+		<v-data-table :headers="fieldList" :items="personList" :footer-props="{ itemsPerPageOptions: [1,50,100,500,-1] }" :options.sync="personListOption" :server-items-length="personListTotal" :loading="loading" sort-by="id">
 			<template v-slot:top>
 				<v-row no-gutters style="padding:5px 0 0 0;">
 					<v-col cols="12" sm="6">
@@ -103,7 +95,7 @@ import axios from "axios";
 export default {
 	data: function() {
 		return {
-			title: 'person',
+			title: "person",
 			fieldList: [
 				{
 					text: "Id",
@@ -149,7 +141,7 @@ export default {
 		},
 		listPerson() {
 			const { sortBy, sortDesc, page, itemsPerPage, multiSort } = this.personListOption;
-			let sortField = 'id';
+			let sortField = "id";
 			let sortDirection = "desc";
 			if (!multiSort && sortBy && sortBy.length == 1 && sortDesc && sortDesc.length == 1) {
 				sortField = sortBy[0];

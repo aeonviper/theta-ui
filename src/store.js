@@ -1,13 +1,13 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
-import axios from 'axios'
+import Vue from "vue";
+import Vuex from "vuex";
+import axios from "axios";
 
-Vue.use(Vuex)
+Vue.use(Vuex);
 
 /* eslint-disable */
 
 if (localStorage.getItem("principal") && JSON.parse(localStorage.getItem("principal")).token) {
-	axios.defaults.headers.common['Authorization'] = 'Bearer ' + JSON.parse(localStorage.getItem("principal")).token;
+	axios.defaults.headers.common["Authorization"] = "Bearer " + JSON.parse(localStorage.getItem("principal")).token;
 }
 // console.log('axios authorization: ' + axios.defaults.headers.common['Authorization']);
 
@@ -24,14 +24,14 @@ export default new Vuex.Store({
 		login(state, principal) {
 			// console.log('mutation: login before state: ' + JSON.stringify(state) + " principal: " + JSON.stringify(principal));
 			state.principal = principal;
-			axios.defaults.headers.common['Authorization'] = 'Bearer ' + principal.token;
+			axios.defaults.headers.common["Authorization"] = "Bearer " + principal.token;
 			localStorage.setItem("principal", JSON.stringify(principal));
 			// console.log('mutation: login after state: ' + JSON.stringify(state, null, 4));
 		},
 		logout(state) {
 			// console.log('mutation: logout before state: ' + JSON.stringify(state));
 			state.principal = {};
-			delete axios.defaults.headers.common['Authorization'];
+			delete axios.defaults.headers.common["Authorization"];
 			localStorage.removeItem("principal");
 			// console.log('mutation: logout after state: ' + JSON.stringify(state));
 		},
@@ -53,40 +53,40 @@ export default new Vuex.Store({
 		login({ commit }, principal) {
 			// console.log('action: login');
 			return new Promise((resolve, reject) => {
-				axios.post(
-					"/system/authentication/login",
-					{
+				axios
+					.post("/system/authentication/login", {
 						type: principal.type,
 						email: principal.email,
 						password: principal.password
-					}
-				).then(response => {
-					let principal = response.data;
-					if (principal && principal.token) {
-						commit('login', principal);
-						resolve({response:response, principal:principal});
-					}
-				}).catch(error => reject(error));
+					})
+					.then(response => {
+						let principal = response.data;
+						if (principal && principal.token) {
+							commit("login", principal);
+							resolve({ response: response, principal: principal });
+						}
+					})
+					.catch(error => reject(error));
 			});
 		},
 		logout({ commit }) {
 			// console.log('action: logout');
 			return new Promise((resolve, reject) => {
-				axios.post(
-					"/system/authentication/logout",
-					{}
-				).then(response => { 
-					commit('logout');
-					resolve(response);
-				}).catch(error => reject(error));
+				axios
+					.post("/system/authentication/logout", {})
+					.then(response => {
+						commit("logout");
+						resolve(response);
+					})
+					.catch(error => reject(error));
 			});
 		},
 		debug({ commit }) {
 			// console.log('action: debug');
-			commit('debug');
+			commit("debug");
 		}
 	},
 	getters: {
-		isAuthenticated: state => (state.principal && state.principal.token)
+		isAuthenticated: state => state.principal && state.principal.token
 	}
-})
+});
