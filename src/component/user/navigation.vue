@@ -36,7 +36,7 @@
 			</v-menu>
 		</v-app-bar>
 
-		<router-view></router-view>
+		<router-view :key="$route.fullPath"></router-view>
 
 		<v-dialog v-model="showChangePassword" max-width="500">
 			<v-card>

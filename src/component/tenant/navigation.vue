@@ -67,7 +67,7 @@
 			</v-list>
 		</v-navigation-drawer>
 
-		<router-view></router-view>
+		<router-view :key="$route.fullPath"></router-view>
 
 		<v-dialog v-model="showEditPassword" max-width="500">
 			<v-card style="padding-bottom:10px;">
