@@ -63,7 +63,7 @@
 					</v-btn>
 				</div>
 
-				<template v-if="$store.state.notification.content && $store.state.notification.content.type == 'NOTIFICATION'">
+				<template v-if="$store.state.notification.content && $store.state.notification.content.type === 'NOTIFICATION'">
 					<div style="color:#C42126;font-size:14px;" :key="item" v-for="item in $store.state.notification.content.fieldErrorList">{{item}}</div>
 					<div style="color:#ED5025;font-size:14px;" :key="item" v-for="item in $store.state.notification.content.errorList">{{item}}</div>
 					<div style="color:#E26026;font-size:14px;" :key="item" v-for="item in $store.state.notification.content.noticeList">{{item}}</div>

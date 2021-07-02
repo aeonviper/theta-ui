@@ -174,15 +174,15 @@ new Vue({
 
 				let notification = { title: "Unknown error", content: "" };
 				if (error.response) {
-					if (error.response.status == 400) {
+					if (error.response.status === 400) {
 						notification.title = "Bad request";
-					} else if (error.response.status == 500) {
+					} else if (error.response.status === 500) {
 						notification.title = "Server error";
-					} else if (error.response.status == 401) {
+					} else if (error.response.status === 401) {
 						notification.title = "Unauthorized";
-					} else if (error.response.status == 403) {
+					} else if (error.response.status === 403) {
 						notification.title = "Forbidden";
-					} else if (error.response.status == 404) {
+					} else if (error.response.status === 404) {
 						notification.title = "Not found";
 					} else {
 						notification.title = "Notification (" + error.response.status + ")";
@@ -199,7 +199,7 @@ new Vue({
 			response => {
 				this.unload();
 
-				if (response.data && response.data.type == "NOTIFICATION") {
+				if (response.data && response.data.type === "NOTIFICATION") {
 					store.commit("showNotification", { title: "Notification", content: response.data });
 				}
 
@@ -210,15 +210,15 @@ new Vue({
 
 				let notification = { title: "Unknown error", content: "" };
 				if (error.response) {
-					if (error.response.status == 400) {
+					if (error.response.status === 400) {
 						notification.title = "Bad request";
-					} else if (error.response.status == 500) {
+					} else if (error.response.status === 500) {
 						notification.title = "Server error";
-					} else if (error.response.status == 401) {
+					} else if (error.response.status === 401) {
 						notification.title = "Unauthorized";
-					} else if (error.response.status == 403) {
+					} else if (error.response.status === 403) {
 						notification.title = "Forbidden";
-					} else if (error.response.status == 404) {
+					} else if (error.response.status === 404) {
 						notification.title = "Not found";
 					} else {
 						notification.title = "Notification (" + error.response.status + ")";

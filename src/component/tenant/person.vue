@@ -9,7 +9,6 @@
 							<h2>Person list</h2>
 						</div>
 					</v-col>
-					<v-col></v-col>
 					<v-col cols="12" sm="6">
 						<div class="d-flex px-2">
 							<v-text-field v-model="keyword" append-icon="mdi-magnify" label="Search" hide-details style="margin-right:10px;"></v-text-field>
@@ -21,8 +20,8 @@
 				</v-row>
 			</template>
 			<template v-slot:item.active="{ item }">
-				<v-icon v-if="item.active == true" color="green" title="Active">mdi-check</v-icon>
-				<v-icon v-else-if="item.active == false" color="red" title="Inactive">mdi-block-helper</v-icon>
+				<v-icon v-if="item.active === true" color="green" title="Active">mdi-check</v-icon>
+				<v-icon v-else color="red" title="Inactive">mdi-block-helper</v-icon>
 			</template>
 			<template v-slot:item.role="{ item }">{{ $root.enum(item.role) }}</template>
 			<template v-slot:item.action="{ item }">
