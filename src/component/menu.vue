@@ -40,7 +40,7 @@
 						<v-icon color="secondary">mdi-lock-outline</v-icon>
 					</v-list-item-icon>
 					<v-list-item-content>
-						<v-list-item-title>Ganti password</v-list-item-title>
+						<v-list-item-title>Change password</v-list-item-title>
 					</v-list-item-content>
 				</v-list-item>
 			</v-list>
@@ -69,16 +69,16 @@
 
 		<v-dialog v-model="showEditPassword" max-width="500">
 			<v-card style="padding-bottom:10px;">
-				<v-card-title>Ganti password</v-card-title>
+				<v-card-title>Change password</v-card-title>
 				<v-form ref="formEditPassword" class="px-5">
-					<v-text-field v-model="currentPassword" label="Password sekarang" type="password"></v-text-field>
-					<v-text-field v-model="newPassword" label="Password baru" type="password"></v-text-field>
-					<v-text-field v-model="confirmNewPassword" label="Konfirmasi password baru" type="password"></v-text-field>
+					<v-text-field v-model="currentPassword" label="Current password" type="password"></v-text-field>
+					<v-text-field v-model="newPassword" label="New password" type="password"></v-text-field>
+					<v-text-field v-model="confirmNewPassword" label="Confirm new password" type="password"></v-text-field>
 				</v-form>
 				<v-card-actions>
 					<v-spacer></v-spacer>
-					<v-btn @click="showEditPassword = false">Batal</v-btn>
-					<v-btn @click="editPassword" color="primary">Simpan</v-btn>
+					<v-btn @click="showEditPassword = false">Cancel</v-btn>
+					<v-btn @click="editPassword" color="primary">Save</v-btn>
 				</v-card-actions>
 			</v-card>
 		</v-dialog>
@@ -101,7 +101,7 @@
 					<div style="color:#E26026;font-size:14px;">{{$store.state.notification.content}}</div>
 				</template>
 				<div style="text-align:center;margin-top:20px;">
-					<v-btn color="primary" @click="hideNotification">Tutup</v-btn>
+					<v-btn color="primary" @click="hideNotification">Close</v-btn>
 				</div>
 			</v-card>
 		</v-dialog>
