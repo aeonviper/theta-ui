@@ -2,7 +2,7 @@
 	<div>
 		<div v-if="$window.location.origin.includes('test')" class="banner" style="background-color:#03B3B2;color:white;">TEST</div>
 		<div v-if="$window.location.origin.includes('localhost')" class="banner" style="background-color:#82BA00;color:white;">DEVELOPMENT</div>
-		<router-view></router-view>
+		<router-view v-if="loaded"></router-view>
 	</div>
 </template>
 
@@ -36,3 +36,22 @@ div.banner {
 	overflow: hidden;
 }
 </style>
+
+<script>
+/* eslint-disable no-console */
+
+export default {
+	data: function() {
+		return {
+			loaded: false
+		};
+	},
+	mounted: function() {
+		document.fonts.ready.then(
+			function() {
+				this.loaded = true;
+			}.bind(this)
+		);
+	}
+};
+</script>
