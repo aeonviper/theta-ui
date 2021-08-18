@@ -25,7 +25,7 @@
 			</template>
 			<template v-slot:item.role="{ item }">{{ $root.enum(item.role) }}</template>
 			<template v-slot:item.action="{ item }">
-				<v-icon class="mr-2" @click="$router.push('/tenant/person/edit/' + item.id)">mdi-pencil</v-icon>
+				<v-icon @click="$router.push('/tenant/person/edit/' + item.id)">mdi-pencil</v-icon>
 				<v-icon @click="showDeletePerson(item)">mdi-delete</v-icon>
 			</template>
 			<template v-slot:no-data>Empty list</template>

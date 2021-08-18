@@ -4,6 +4,9 @@
 		<v-card>
 			<v-card-title>
 				<span class="headline">Edit</span>
+				<v-btn fab small elevation="0" @click="$router.push('/tenant/person')">
+					<v-icon>mdi-close</v-icon>
+				</v-btn>
 			</v-card-title>
 			<v-card-text>
 				<v-text-field v-model="person.name" label="Name"></v-text-field>

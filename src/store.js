@@ -61,7 +61,7 @@ export default new Vuex.Store({
 					})
 					.then(response => {
 						let principal = response.data;
-						if (principal && principal.token) {
+						if (principal && principal.token && principal.id) {
 							commit("login", principal);
 							resolve({ response: response, principal: principal });
 						}

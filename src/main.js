@@ -140,11 +140,12 @@ if (window.location.origin.includes("localhost")) {
 	axios.defaults.baseURL = "http://localhost:8900/theta";
 }
 
+Vue.prototype.$base = axios.defaults.baseURL;
 Vue.prototype.$window = window;
 
 var monthList = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
-Vue.filter("formatDate", function(value) {
+Vue.filter("formatJavaDate", function(value) {
 	if (value != null) {
 		return value.date.day + " " + monthList[value.date.month - 1] + " " + value.date.year;
 	} else {
@@ -300,7 +301,7 @@ new Vue({
 				}
 			}
 		},
-		formatDateTime(instant) {
+		formatJavaScriptDateTime(instant) {
 			if (instant != null) {
 				return instant.getDate() + " " + this.monthList[instant.getMonth()] + " " + instant.getFullYear() + " " + (instant.getHours() < 10 ? "0" : "") + instant.getHours() + ":" + (instant.getMinutes() < 10 ? "0" : "") + instant.getMinutes();
 			} else {
