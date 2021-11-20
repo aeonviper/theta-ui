@@ -11,7 +11,7 @@
 			</v-btn>
 		</v-app-bar>
 		<v-navigation-drawer app v-model="drawer">
-			<v-list nav>
+			<v-list nav dense>
 				<v-list-item link>
 					<v-list-item-icon @click="drawer = false;">
 						<v-icon color="black">mdi-close</v-icon>
@@ -46,7 +46,7 @@
 			</v-list>
 			<v-divider></v-divider>
 			<v-list nav dense>
-				<v-list-item link to="/dashboard">
+				<v-list-item link to="/dashboard" v-if="$root.anyInSetInList($store.state.principal.roleSet, ['Administrator','Tenant','User'])">
 					<v-list-item-icon>
 						<v-icon color="secondary">mdi-monitor-dashboard</v-icon>
 					</v-list-item-icon>
@@ -54,7 +54,7 @@
 						<v-list-item-title>Dashboard</v-list-item-title>
 					</v-list-item-content>
 				</v-list-item>
-				<v-list-item link to="/person" v-if="['Administrator','Tenant','User'].includes($store.state.principal.role)">
+				<v-list-item link to="/person" v-if="$root.anyInSetInList($store.state.principal.roleSet, ['Administrator','Tenant','User'])">
 					<v-list-item-icon>
 						<v-icon color="secondary">mdi-account-multiple</v-icon>
 					</v-list-item-icon>

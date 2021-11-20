@@ -10,7 +10,7 @@
 						<v-text-field v-model="person.name" label="Name"></v-text-field>
 						<v-text-field v-model="person.email" label="Email"></v-text-field>
 						<v-text-field v-model="person.password" label="Password" type="password"></v-text-field>
-						<v-select v-model="person.role" label="Role" :items="roleList"></v-select>
+						<v-select v-model="person.roleSet" :items="roleList" label="Role" multiple chips item-value="value" item-text="text"></v-select>
 					</v-card-text>
 					<v-card-actions>
 						<v-spacer></v-spacer>

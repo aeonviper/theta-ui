@@ -4,6 +4,7 @@
 		<v-card>
 			<v-card-title>
 				<span class="headline">Edit</span>
+				<v-spacer></v-spacer>
 				<v-btn fab small elevation="0" @click="$router.push('/tenant/person')">
 					<v-icon>mdi-close</v-icon>
 				</v-btn>
@@ -13,7 +14,7 @@
 				<v-text-field v-model="person.email" label="Email"></v-text-field>
 				<v-text-field v-model="person.password" label="Password" type="password"></v-text-field>
 				<v-switch v-model="person.active" label="Active"></v-switch>
-				<v-select v-model="person.role" label="Role" :items="roleList"></v-select>
+				<v-select v-model="person.roleSet" :items="roleList" label="Role" multiple chips item-value="value" item-text="text"></v-select>
 				<v-row>
 					<v-col md="2" cols="12">
 						<v-file-input v-model="attachment1" label="Attachment"></v-file-input>

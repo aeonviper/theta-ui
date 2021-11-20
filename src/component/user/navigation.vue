@@ -15,7 +15,7 @@
 					</v-btn>
 				</template>
 
-				<v-list>
+				<v-list dense>
 					<v-list-item @click="showChangePassword = true" link>
 						<v-list-item-icon>
 							<v-icon>mdi-lock-reset</v-icon>

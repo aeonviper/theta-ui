@@ -105,25 +105,25 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
 	if (to.matched.some(record => record.meta.restricted === true)) {
-		if (store.state.principal.role) {
+		if (store.state.principal.roleSet) {
 			next();
 			return;
 		}
 		next("/unauthorized");
 	} else if (to.matched.some(record => record.meta.role === "Administrator")) {
-		if (store.state.principal.role === "Administrator") {
+		if (store.state.principal.roleSet.includes("Administrator")) {
 			next();
 			return;
 		}
 		next("/administrator");
 	} else if (to.matched.some(record => record.meta.role === "Tenant")) {
-		if (store.state.principal.role === "Tenant") {
+		if (store.state.principal.roleSet.includes("Tenant")) {
 			next();
 			return;
 		}
 		next("/tenant");
 	} else if (to.matched.some(record => record.meta.role === "User")) {
-		if (store.state.principal.role === "User") {
+		if (store.state.principal.roleSet.includes("User")) {
 			next();
 			return;
 		}
@@ -147,7 +147,23 @@ var monthList = ["January", "February", "March", "April", "May", "June", "July",
 
 Vue.filter("formatJavaDate", function(value) {
 	if (value != null) {
-		return value.date.day + " " + monthList[value.date.month - 1] + " " + value.date.year;
+		return value.day + " " + monthList[value.month - 1] + " " + value.year;
+	} else {
+		return "";
+	}
+});
+
+Vue.filter("formatJavaTime", function(value) {
+	if (value != null) {
+		return (value.hour < 10 ? '0' : '') + value.hour + ":" + (value.minute < 10 ? '0' : '') + value.minute;
+	} else {
+		return "";
+	}
+});
+
+Vue.filter("formatJavaDateTime", function(value) {
+	if (value != null) {
+		return value.date.day + " " + monthList[value.date.month - 1] + " " + value.date.year + " " + (value.time.hour < 10 ? '0' : '') + value.time.hour + ":" + (value.time.minute < 10 ? '0' : '') + value.time.minute;
 	} else {
 		return "";
 	}
@@ -301,6 +317,12 @@ new Vue({
 				}
 			}
 		},
+		coalesce(a, b) {
+			if (a) {
+				return a;
+			}
+			return b;
+		},
 		formatJavaScriptDateTime(instant) {
 			if (instant != null) {
 				return instant.getDate() + " " + this.monthList[instant.getMonth()] + " " + instant.getFullYear() + " " + (instant.getHours() < 10 ? "0" : "") + instant.getHours() + ":" + (instant.getMinutes() < 10 ? "0" : "") + instant.getMinutes();
@@ -310,6 +332,16 @@ new Vue({
 		},
 		capitalizeFirst(text) {
 			return text && text[0].toUpperCase() + text.slice(1);
-		}
+		},
+		anyInSetInList(set, list) {
+			for (let a of set) {
+				for (let b of list) {
+					if (a === b) {
+						return true;
+					}
+				}
+			}
+			return false;
+		},
 	}
 }).$mount("#application");

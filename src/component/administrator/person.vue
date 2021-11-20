@@ -23,7 +23,9 @@
 				<v-icon v-if="item.active === true" color="green" title="Active">mdi-check</v-icon>
 				<v-icon v-else color="red" title="Inactive">mdi-block-helper</v-icon>
 			</template>
-			<template v-slot:item.role="{ item }">{{ $root.enum(item.role) }}</template>
+			<template v-slot:item.role="{ item }">
+				<v-chip v-for="role in item.roleSet" :key="role" class="mr-2">{{ $root.enum(role) }}</v-chip>
+			</template>
 			<template v-slot:item.action="{ item }">
 				<v-icon @click="showEditPerson(item)">mdi-pencil</v-icon>
 				<v-icon @click="showDeletePerson(item)">mdi-delete</v-icon>
@@ -43,7 +45,7 @@
 					<v-text-field v-model="person.email" label="Email"></v-text-field>
 					<v-text-field v-model="person.password" label="Password" type="password"></v-text-field>
 					<v-switch v-model="person.active" label="Active"></v-switch>
-					<v-select v-model="person.role" label="Role" :items="roleList"></v-select>
+					<v-select v-model="person.roleSet" :items="roleList" label="Role" multiple chips item-value="value" item-text="text"></v-select>
 				</v-card-text>
 				<v-card-actions>
 					<v-spacer></v-spacer>
@@ -65,7 +67,7 @@
 					<v-text-field v-model="person.email" label="Email"></v-text-field>
 					<v-text-field v-model="person.password" label="Password" type="password"></v-text-field>
 					<v-switch v-model="person.active" label="Active"></v-switch>
-					<v-select v-model="person.role" label="Role" :items="roleList"></v-select>
+					<v-select v-model="person.roleSet" :items="roleList" label="Role" multiple chips item-value="value" item-text="text"></v-select>
 				</v-card-text>
 				<v-card-actions>
 					<v-spacer></v-spacer>
@@ -107,7 +109,7 @@ export default {
 				{ text: "Name", value: "name" },
 				{ text: "Email", value: "email" },
 				{ text: "Active", value: "active" },
-				{ text: "Role", value: "role" },
+				{ text: "Role", value: "role", sortable: false },
 				{ text: "", value: "action", sortable: false }
 			],
 			personList: [],
