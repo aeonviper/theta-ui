@@ -23,7 +23,7 @@
 				<v-icon v-if="item.active === true" color="green" title="Active">mdi-check</v-icon>
 				<v-icon v-else color="red" title="Inactive">mdi-block-helper</v-icon>
 			</template>
-			<template v-slot:item.transitMap.birthDate="{ item }">{{ item.transitMap.birthDateFull }}</template>
+			<template v-slot:item.map.birthDate="{ item }">{{ item.map.birthDateFull }}</template>
 			<template v-slot:item.role="{ item }">
 				<v-chip v-for="role in item.roleSet" :key="role" class="mr-2">{{ $root.enum(role) }}</v-chip>
 			</template>
@@ -46,9 +46,9 @@
 						<v-col cols="6">
 							<div style="display:flex;justify-content:space-between;">
 								<div class="label">Date of birth</div>
-								<a @click="person.transitMap.birthDate = null;">Clear</a>
+								<a @click="person.map.birthDate = null;">Clear</a>
 							</div>
-							<v-date-picker first-day-of-week="1" v-model="person.transitMap.birthDate" full-width></v-date-picker>
+							<v-date-picker first-day-of-week="1" v-model="person.map.birthDate" full-width></v-date-picker>
 						</v-col>
 						<v-col cols="6">
 							<v-text-field v-model="person.name" label="Name"></v-text-field>
@@ -90,9 +90,9 @@
 							</v-card>
 							<div style="display:flex;justify-content:space-between;">
 								<div class="label">Date of birth</div>
-								<a @click="person.transitMap.birthDate = null;">Clear</a>
+								<a @click="person.map.birthDate = null;">Clear</a>
 							</div>
-							<v-date-picker first-day-of-week="1" v-model="person.transitMap.birthDate" full-width></v-date-picker>
+							<v-date-picker first-day-of-week="1" v-model="person.map.birthDate" full-width></v-date-picker>
 						</v-col>
 						<v-col cols="6">
 							<v-text-field v-model="person.name" label="Name"></v-text-field>
@@ -169,14 +169,14 @@ export default {
 				{ text: "Name", value: "name" },
 				{ text: "Email", value: "email" },
 				{ text: "Active", value: "active" },
-				{ text: "Birth date", value: "transitMap.birthDate" },
+				{ text: "Birth date", value: "map.birthDate" },
 				{ text: "Role", value: "role", sortable: false },
 				{ text: "", value: "action", sortable: false }
 			],
 			keyword: "",
 			personList: [],
 			person: {
-				transitMap: {}
+				map: {}
 			},
 			dialogAdd: false,
 			dialogEdit: false,
@@ -210,7 +210,7 @@ export default {
 		},
 		showAddPerson() {
 			this.person = {
-				transitMap: {}
+				map: {}
 			};
 			this.dialogAdd = true;
 		},
